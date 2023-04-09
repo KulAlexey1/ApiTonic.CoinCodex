@@ -7,7 +7,7 @@ namespace ApiTonic.API.Queries
     public class Query
     {
         public Task<Prediction> GetPredictionAsync(
-            [Service] IPredictionsService service,
+            [Service] IPredictionService service,
             string shortName)
         {
             return service.GetAsync(shortName);
