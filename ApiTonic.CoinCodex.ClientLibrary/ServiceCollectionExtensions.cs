@@ -22,6 +22,19 @@ namespace ApiTonic.CoinCodex.ClientLibrary
                         client.DefaultRequestHeaders.Add(apiSettings.HeaderApiKey, apiSettings.ApiKey);
                     }
                 });
+
+            services.AddRefitClient<ICoinService>(RefitExtensions.GetNewtonsoftJsonRefitSettings())
+                .ConfigureHttpClient ((serviceProvider, client) =>
+                {
+                    var apiSettings = serviceProvider.GetRequiredService<IOptions<ApiSettings>>().Value;
+
+                    client.BaseAddress = new Uri(apiSettings.BaseAddress);
+
+                    if (apiSettings.HeaderApiKey != null && apiSettings.ApiKey != null)
+                    {
+                        client.DefaultRequestHeaders.Add(apiSettings.HeaderApiKey, apiSettings.ApiKey);
+                    }
+                });
         }
     }
 }

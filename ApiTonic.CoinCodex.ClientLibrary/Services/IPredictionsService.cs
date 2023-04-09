@@ -5,7 +5,7 @@ namespace ApiTonic.CoinCodex.ClientLibrary.Services
 {
     public interface IPredictionsService
     {
-        [Get("/predictions/get_byshortname/{shortname}")]
+        [Get("/api/predictions/get_byshortname/{shortname}")]
         Task<Prediction> GetAsync(string shortName);
     }
 }

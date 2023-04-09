@@ -1,4 +1,5 @@
-﻿using ApiTonic.CoinCodex.ClientLibrary.Models.Prediction;
+﻿using ApiTonic.CoinCodex.ClientLibrary.Models.Coin;
+using ApiTonic.CoinCodex.ClientLibrary.Models.Prediction;
 using ApiTonic.CoinCodex.ClientLibrary.Services;
 
 namespace ApiTonic.API.Queries
@@ -10,6 +11,11 @@ namespace ApiTonic.API.Queries
             string shortName)
         {
             return service.GetAsync(shortName);
+        }
+
+        public Task<IEnumerable<Coin>> GetCoinsAsync([Service] ICoinService service)
+        {
+            return service.GetAllAsync();
         }
     }
 }
