@@ -1,24 +1,31 @@
 using ApiTonic.API.Queries;
-using ApiTonic.CoinCodex.ClientLibrary.Models.Prediction;
-using ApiTonic.CoinCodex.ClientLibrary;
+using ApiTonic.CoinCodex.ClientLibrary.Models;
+using ApiTonic.CoinCodex.API.Models;
+using StackExchange.Redis;
+using ApiTonic.CoinCodex.API.Extensions;
+using ApiTonic.CoinCodex.ClientLibrary.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.Configure<ApiSettings>(
-    builder.Configuration.GetSection("ApiSettings"));
+var graphQLSettings = builder.Configuration.GetSection("ApiTonic:GraphQL").Get<GraphQLSettings>();
 
-builder.Services.AddMvc();
-builder.Services.AddGraphQLServer();
-builder.Services.AddCors();
-builder.Services
+var services = builder.Services;
+
+services.Configure<ApiSettings>(
+    builder.Configuration.GetSection("ApiTonic:CoinCodexAPI"));
+services.AddCors();
+
+services
+    .AddSingleton(ConnectionMultiplexer.Connect(graphQLSettings.RedisAddress))
     .AddGraphQLServer()
-    .AddQueryType<Query>();
+    .AddQueryType<Query>()
+    .InitializeOnStartup()
+    .PublishSchemaDefinitionToRedis(graphQLSettings);
 
-builder.Services.AddClientLibraryServices();
+services.AddClientLibraryServices();
 
 var app = builder.Build();
 
-app.MapControllers();
 app.MapGraphQL();
 
 app.UseCors(x => x
