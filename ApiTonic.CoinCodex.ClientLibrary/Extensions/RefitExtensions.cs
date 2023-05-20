@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using Refit;
+using ApiTonic.CoinCodex.ClientLibrary.Converters;
 
 namespace ApiTonic.CoinCodex.ClientLibrary.Extensions
 {
@@ -11,7 +12,8 @@ namespace ApiTonic.CoinCodex.ClientLibrary.Extensions
                 new NewtonsoftJsonContentSerializer(
                     new JsonSerializerSettings
                     {
-                        ContractResolver = new CamelCasePropertyNamesContractResolver()
+                        ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                        Converters = { new SafeDateTimeConverter() }
                     })
                );
     }
