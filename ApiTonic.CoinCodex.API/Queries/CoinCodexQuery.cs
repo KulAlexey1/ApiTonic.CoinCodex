@@ -6,16 +6,39 @@ namespace ApiTonic.CoinCodex.API.Queries
 {
     public class CoinCodexQuery
     {
-        public Task<CcPrediction> GetPredictionAsync(
+        public async Task<CcPrediction> GetPredictionAsync(
             [Service] IPredictionService service,
-            string shortName)
+            string shortname)
         {
-            return service.GetAsync(shortName);
+            try
+            {
+                return await service.GetAsync(shortname);
+            }
+            catch (Exception ex)
+            {
+                var t = 1;
+                throw ex;
+            }
         }
 
-        public Task<IEnumerable<CcCoin>> GetCoinsAsync([Service] ICoinService service)
+        //public async Task<IEnumerable<CcCoin>> GetCoinsAsync([Service] ICoinService service)
+        //{
+        //    var coins = await service.GetAllAsync();
+        //    return coins.Take(50);
+        //}
+
+        public async Task<CcCoinListResult> GetCoinListAsync([Service] ICoinService service)
         {
-            return service.GetAllAsync();
+            try
+            {
+                var result = await service.GetCoinListAsync();
+                return result;
+            }
+            catch(Exception ex)
+            {
+                var t = 1;
+                throw ex;
+            }
         }
     }
 }

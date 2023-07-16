@@ -3,6 +3,6 @@
     public class CcOscilators
     {
         public List<CcOscilatorData> data { get; set; }
-        public int time { get; set; }
+        public int? time { get; set; }
     }
 }

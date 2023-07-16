@@ -2,9 +2,9 @@
 {
     public class CcGreedFear
     {
-        public int value { get; set; }
+        public int? value { get; set; }
         public string value_classification { get; set; }
-        public int timestamp { get; set; }
-        public int time_until_update { get; set; }
+        public int? timestamp { get; set; }
+        public int? time_until_update { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 {
     public class CcGreenDays
     {
-        public int green { get; set; }
-        public int all { get; set; }
+        public int? green { get; set; }
+        public int? all { get; set; }
     }
 }

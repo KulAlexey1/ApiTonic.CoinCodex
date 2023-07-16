@@ -2,7 +2,7 @@
 {
     public class CcGrowthHistoricalData
     {
-        public int width { get; set; }
-        public List<List<double>> data { get; set; }
+        public int? width { get; set; }
+        public List<List<double?>> data { get; set; }
     }
 }

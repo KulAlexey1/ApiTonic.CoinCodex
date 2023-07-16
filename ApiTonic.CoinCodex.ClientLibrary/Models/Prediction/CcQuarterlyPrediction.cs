@@ -2,7 +2,7 @@
 {
     public class CcQuarterlyPrediction
     {
-        public List<List<double>> currentData { get; set; }
+        public List<List<double?>> currentData { get; set; }
         public CcSimplePredictionData prediction { get; set; }
     }
 }

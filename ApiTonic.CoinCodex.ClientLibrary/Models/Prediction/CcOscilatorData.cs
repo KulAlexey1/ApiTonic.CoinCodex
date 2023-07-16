@@ -2,7 +2,7 @@
 {
     public class CcOscilatorData
     {
-        public double value { get; set; }
+        public double? value { get; set; }
         public string sentiment { get; set; }
         public string name { get; set; }
     }

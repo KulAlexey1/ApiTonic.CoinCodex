@@ -2,7 +2,7 @@
 {
     public class CcWorldMoneyM
     {
-        public double current { get; set; }
+        public double? current { get; set; }
         public CcPercent percent { get; set; }
     }
 }
